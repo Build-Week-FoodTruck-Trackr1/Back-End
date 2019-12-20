@@ -14,7 +14,7 @@ server.use(express.json());
 server.use('/api', authRouter)
 
 server.get('/', (req, res) => {
-    res.send('You made it')
+    res.send('Congratulations Lambda Student! You made it! To register be sure to include "/api/register" to the link above')
 })
 
 module.exports = server;
