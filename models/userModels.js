@@ -1,18 +1,14 @@
 const db = require('../database/dbConfig.js');
 
-function findUser(userType, filter) {
-    if(userType === 'diner'){
-        return db(`diners`)
-            .select(
-                'id',
-                'username',
-                'email',
-                'currentLocation'
-            ).where(filter)
+function findUser(filter) {
+    const { username, type } = filter
+    
+    if(type === 'diner'){
+        return db('diner').where({username})
     } else {
-        return db('operators')
+        return db('operator')
             .select('id', 'username', 'trucksOwned')
-            .where(filter);
+            .where(username);
     }
 }
 
