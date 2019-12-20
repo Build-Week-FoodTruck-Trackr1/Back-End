@@ -13,7 +13,7 @@ server.use(express.json());
 
 server.use('/api', authRouter)
 
-server.use('/', (req, res) => {
+server.get('/', (req, res) => {
     res.send('You made it')
 })
 
