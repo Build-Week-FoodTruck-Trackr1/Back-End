@@ -14,12 +14,12 @@ function findUser(userType, filter) {
         return db('operators')
             .select('id', 'username', 'trucksOwned')
             .where(filter);
-    })
+    }
 }
 
 function findUserById(userType, id) {
     if(userType === 'diner'){
-        return db(`diners`)
+        return db('diner')
             .select(
                 'id',
                 'username',
@@ -28,17 +28,17 @@ function findUserById(userType, id) {
                 'favoriteTrucks'
             ).where({ id }).first();
     } else {
-        return db('operators')
+        return db('operator')
             .select('id', 'username', 'trucksOwned')
             .where({ id })
             .first();
-    })
-  }
+    }
+}
 
-async function insert(userType, user) {
-    const [id] = await db(`${userType}`).insert(user)
+async function insert(user) {
+    const [id] = await db(`${user.type}`).insert(user)
 
-    return findUserById(id)
+    return findUserById(user.type, id)
 }
 
 module.exports = {
