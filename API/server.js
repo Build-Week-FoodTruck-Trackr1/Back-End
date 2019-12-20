@@ -13,4 +13,8 @@ server.use(express.json());
 
 server.use('/api', authRouter)
 
+server.use('/', (req, res) => {
+    console.log('You made it')
+})
+
 module.exports = server;

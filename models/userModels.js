@@ -7,8 +7,7 @@ function findUser(userType, filter) {
                 'id',
                 'username',
                 'email',
-                'currentLocation',
-                'favoriteTrucks'
+                'currentLocation'
             ).where(filter)
     } else {
         return db('operators')

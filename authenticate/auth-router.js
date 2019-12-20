@@ -20,4 +20,26 @@ router.post('/register', (req, res) => {
             res.status(500).json({error_message:'Server Error', ErrNo:err})})
 })
 
+router.post("/login", (req, res) => {
+    const { userType, username, password } = req.body;
+  
+    Users.findUser({ userType, username })
+      .first()
+      .then(user => {
+        if (user && bcrypt.compareSync(password, user.password)) {
+          const token = getToken(user.username);
+  
+          res.status(200).json({
+            message: `Hi ${user.username}`,
+            token
+          });
+        } else {
+          res.status(401).json({ error: `This is not for you.` });
+        }
+      })
+      .catch(error => res.status(500).json(error.message));
+});
+
+
+
 module.exports = router;
