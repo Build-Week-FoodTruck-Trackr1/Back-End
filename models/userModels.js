@@ -7,8 +7,7 @@ function findUser(filter) {
         return db('diner').where({username})
     } else {
         return db('operator')
-            .select('id', 'username', 'trucksOwned')
-            .where(username);
+            .where({username});
     }
 }
 
@@ -24,7 +23,7 @@ function findUserById(userType, id) {
             ).where({ id }).first();
     } else {
         return db('operator')
-            .select('id', 'username', 'trucksOwned')
+            .select('id', 'username')
             .where({ id })
             .first();
     }

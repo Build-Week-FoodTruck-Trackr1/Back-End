@@ -16,7 +16,6 @@ router.post('/register', (req, res) => {
             res.status(201).json({message: 'Success! you have completed registration', newUser, token})
         })
         .catch(err =>{
-            console.log(`${user.type}`)
             res.status(500).json({error_message:'Server Error', ErrNo:err})})
 })
 
@@ -32,7 +31,6 @@ router.post('/login', (req, res) => {
           res.status(200).json({
             message: `Hi ${user.username}`,
             type: `${user.type}`,
-            email:`${user.currentLocation}`,
             token
 
           });

@@ -8,14 +8,22 @@ exports.up = function(knex) {
       tbl.string('email', 128).notNullable();
       tbl.string('password', 128).notNullable();
       tbl.string('currentLocation').notNullable();
-      tbl.specificType('favoriteTrucks', 'text ARRAY');
+      // tbl.specificType('favoriteTrucks', 'text ARRAY');
     })
     .createTable('operator', tbl => {
       tbl.increments();
-      tbl.string('type').defaultTo('operator')
+      tbl.string('type')
       tbl.string('username', 128).unique().notNullable();
       tbl.string('password', 128).notNullable();
-      tbl.specificType('trucksOwned', 'text ARRAY').notNullable();
+      // tbl.specificType('trucksOwned', 'text ARRAY');
+    })
+    .createTable('trucks', tbl => {
+      tbl.increments();
+      tbl.integer('operator_id').notNullable();
+      tbl.string('url');
+      tbl.string('cuisineType').notNullable();
+      // tbl.string('customerRatings')
+      tbl.string('customerRatingAvg').notNullable();
     })
   )
 };
