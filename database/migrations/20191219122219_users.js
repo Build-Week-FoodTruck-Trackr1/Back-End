@@ -14,7 +14,9 @@ exports.up = function(knex) {
       tbl.increments();
       tbl.string('type')
       tbl.string('username', 128).unique().notNullable();
+      tbl.string('email', 128).notNullable();
       tbl.string('password', 128).notNullable();
+      tbl.string('currentLocation').notNullable();
       // tbl.specificType('trucksOwned', 'text ARRAY');
     })
     // .createTable('trucks', tbl => {

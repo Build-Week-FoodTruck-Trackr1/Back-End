@@ -23,8 +23,12 @@ function findUserById(type, id) {
             .first();
     } else if(type === 'operator') {
         return db('operator')
-            .select('id', 'username')
-            .where({ id })
+        .select(
+            'id',
+            'username',
+            'email',
+            'currentLocation'
+        ).where({ id })
             .first();
     } else {
         return 'not a valid Database'
