@@ -17,14 +17,14 @@ exports.up = function(knex) {
       tbl.string('password', 128).notNullable();
       // tbl.specificType('trucksOwned', 'text ARRAY');
     })
-    .createTable('trucks', tbl => {
-      tbl.increments();
-      tbl.integer('operator_id').notNullable();
-      tbl.string('url');
-      tbl.string('cuisineType').notNullable();
-      // tbl.string('customerRatings')
-      tbl.string('customerRatingAvg').notNullable();
-    })
+    // .createTable('trucks', tbl => {
+    //   tbl.increments();
+    //   tbl.integer('operator_id').notNullable();
+    //   tbl.string('url');
+    //   tbl.string('cuisineType').notNullable();
+    //   // tbl.string('customerRatings')
+    //   tbl.float('customerRatingAvg').notNullable();
+    // })
   )
 };
 
@@ -32,5 +32,6 @@ exports.down = function(knex) {
   return(knex.schema
     .dropTableIfExists('diner')
     .dropTableIfExists('operator')
+    .dropTableIfExists('trucks')
   )
 };

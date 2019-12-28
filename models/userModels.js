@@ -6,31 +6,37 @@ function findUser(filter) {
     if(type === 'diner'){
         return db('diner').where({username})
     } else {
-        return db('operator')
-            .where({username});
+        return db('operator').where({username});
     }
 }
 
-function findUserById(userType, id) {
-    if(userType === 'diner'){
+function findUserById(type, id) {
+    console.log(type)
+    if(type === 'diner'){
         return db('diner')
             .select(
                 'id',
                 'username',
                 'email',
-                'currentLocation',
-                'favoriteTrucks'
-            ).where({ id }).first();
-    } else {
+                'currentLocation'
+            ).where({ id })
+            .first();
+    } else if(type === 'operator') {
         return db('operator')
             .select('id', 'username')
             .where({ id })
             .first();
+    } else {
+        return 'not a valid Database'
     }
 }
 
 async function insert(user) {
-    const [id] = await db(`${user.type}`).insert(user)
+
+    const [id] = await db(`${user.type}`).insert(user);
+
+    console.log(user)
+
 
     return findUserById(user.type, id)
 }
