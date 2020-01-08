@@ -14,7 +14,7 @@ Librarys Used
 - Helmet - Secures your Express.js apps by setting various HTTP headers.
 - Dotenv - Loads environment variables from a .env file into process.env. 
 - atob - decodes information from the token
-- Knex-Cleaner - deletes files
+- Knex-Cleaner - Helper library to clean a PostgreSQL, MySQL or SQLite3 database tables using Knex. Great for integration tests.
 - Knex - A multi-dialect query builder for Node.js.
 - Nodemon - A tool that helps develop node.js based applications by automatically restarting the node application when a file changes 
 - Sqlite3 - Relational database management system (RDBMS).
