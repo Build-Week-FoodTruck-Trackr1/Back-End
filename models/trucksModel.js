@@ -55,7 +55,7 @@ function remove(name, token) {
 
 function update(changes, token){
     const id = findOperatorId(token);
-    console.log(changes.id)
+    const name = changes.name 
 
-    return db('trucks').where(changes.id && ('operator_id', '=', id)).update(changes)
+    return db('trucks').where(('operator_id', '=', id) && {name}).update(changes)
 }
