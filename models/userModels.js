@@ -4,6 +4,8 @@ function findUsers() {
     return db('operator as o')
         .join('diner as d')
         .select('d.*', 'o.*')
+        .orderBy('username')
+        .limit(10)
 }
 
 function findUser(filter) {

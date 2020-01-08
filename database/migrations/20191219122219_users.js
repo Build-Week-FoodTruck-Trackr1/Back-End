@@ -8,7 +8,7 @@ exports.up = function(knex) {
       tbl.string('email', 128).notNullable();
       tbl.string('password', 128).notNullable();
       tbl.string('currentLocation').notNullable();
-      // tbl.specificType('favoriteTrucks', 'text ARRAY');
+      tbl.string('favoriteTrucks');
     })
     .createTable('operator', tbl => {
       tbl.increments();
@@ -17,22 +17,20 @@ exports.up = function(knex) {
       tbl.string('email', 128).notNullable();
       tbl.string('password', 128).notNullable();
       tbl.string('currentLocation').notNullable();
-      // tbl.specificType('trucksOwned', 'text ARRAY');
+      tbl.string('trucksOwned');
     })
     .createTable('trucks', tbl => {
       tbl.increments();
       tbl.string('name').notNullable();
-      tbl.integer('operator_id')
-      .unsigned()
-      .notNullable()
-      .references('id')
-      .inTable('operator')
-      .onUpdate('CASCADE')
-      .onDelete('CASCADE');
+      tbl.integer('operator_id');
       tbl.string('imgUrl');
       tbl.string('cuisineType').notNullable();
       // tbl.string('customerRatings')
       tbl.float('customerRatingAvg');
+    })
+    .createTable('favorites', tbl => {
+      tbl.integer('diner_id')
+      tbl.integer('truck_id')
     })
   )
 };
@@ -42,5 +40,6 @@ exports.down = function(knex) {
     .dropTableIfExists('diner')
     .dropTableIfExists('operator')
     .dropTableIfExists('trucks')
+    .dropTableIfExists('favorites')
   )
 };
