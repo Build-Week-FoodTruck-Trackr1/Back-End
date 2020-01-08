@@ -27,7 +27,8 @@ Auth Endpoints
 
 | Table    |  Method   |  Endpoint | Required Fields       | Description  |
 |----------|:---------|:----------|:----------------------|:-------------|
-| users    |  Get     | /users |token labeled as authorization in headers |Returns ALL the users in operator and diner table with a limit of 50|
+| users    |  Get     | api/operators |token labeled as authorization in headers |Returns ALL the users in operator database |
+| users    |  Get     | api/diners |token labeled as authorization in headers |Returns ALL the users in diner database|
 | operator or diner    |  Post     | api/register | username, password, type | Creates a new user profile, returns the username , id, type and a jsonwebtoken in the body of the response|
 | operator or diner    |  Post     | api/login | username, password, typee |Uses the username and passowrd sent up to verify the user, if they match, returns the username , id, type and a jsonwebtoken in the body of the response|
 
@@ -46,11 +47,11 @@ Trucks Endpoints
 
 | Table    |  Method   |  Endpoint | required fields       | Description  |
 |----------|:---------|:----------|:----------------------|:-------------|
-| trucks | get | / | none | Lists first 100 trucks in the database |
-| trucks | get | /owned | token with operator_id| Lists the trucks owned by the operator that is logged in|
-| trucks | post | / | name, operator_id, cuisineType | Adds truck to the database |
-| trucks | delete | / | none | deletes a truck if and only if the operator_id and name of the truck matches with one in the database |
-| truck | put | / | name, operator_id, cuisineType | Modifies a truck if and only if a user has a matching operator_id and truck name |
+| trucks | get | /trucks/ | none | Lists first 100 trucks in the database |
+| trucks | get | /trucks/owned | token with operator_id| Lists the trucks owned by the operator that is logged in|
+| trucks | post | /trucks/ | name, operator_id, cuisineType | Adds truck to the database |
+| trucks | delete | /trucks/ | none | deletes a truck if and only if the operator_id and name of the truck matches with one in the database |
+| truck | put | /trucks/ | name, operator_id, cuisineType | Modifies a truck if and only if a user has a matching operator_id and truck name |
 
 Status Codes
 - 200 - If the get request successfully goes through the endpoint will return a response with a status code 200

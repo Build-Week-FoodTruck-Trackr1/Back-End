@@ -1,11 +1,16 @@
 const db = require('../database/dbConfig.js');
 
-function findUsers() {
-    return db('operator as o')
-        .join('diner as d')
-        .select('d.*', 'o.*')
-        .orderBy('username')
-        .limit(10)
+function findOperators() {
+    return db('operator')
+        .orderBy('id', "asc")
+        .groupBy('username')
+
+}
+function findDiners() {
+    return db('diner')
+        .orderBy('id', "asc")
+        .groupBy('username')
+
 }
 
 function findUser(filter) {
@@ -49,7 +54,8 @@ async function insert(user) {
 }
 
 module.exports = {
-    findUsers,
+    findOperators,
+    findDiners,
     findUser,
     findUserById,
     insert

@@ -4,10 +4,17 @@ const bcrypt = require('bcryptjs');
 const Users = require('../models/userModels.js');
 const getToken = require('./getToken.js');
 
-router.get('/users', (req, res) => {
-  Users.findUsers()
-    .then(users => {
-      res.json(users)
+router.get('/diners', (req, res) => {
+  Users.findDiners()
+    .then(diners => {
+      res.json(diners)
+    })
+})
+
+router.get('/operators', (req, res) => {
+  Users.findOperators()
+    .then(operator => {
+      res.json(operator)
     })
 })
 
