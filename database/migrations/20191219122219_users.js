@@ -22,7 +22,7 @@ exports.up = function(knex) {
     .createTable('trucks', tbl => {
       tbl.increments();
       tbl.string('name').notNullable();
-      tbl.integer('operator_id');
+      tbl.integer('operator_id').notNullable();
       tbl.string('imgUrl');
       tbl.string('cuisineType').notNullable();
       // tbl.string('customerRatings')

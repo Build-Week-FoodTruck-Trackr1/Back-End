@@ -13,8 +13,7 @@ function findOperatorId(token){
     const [,payload] = token.split('.')
     const [,,,id] =atob(payload).split(':')
     const [realId] =id.split(',')
-    console.log(realId)
-
+    
     return realId
 }
 
