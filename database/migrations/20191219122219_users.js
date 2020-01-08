@@ -19,14 +19,21 @@ exports.up = function(knex) {
       tbl.string('currentLocation').notNullable();
       // tbl.specificType('trucksOwned', 'text ARRAY');
     })
-    // .createTable('trucks', tbl => {
-    //   tbl.increments();
-    //   tbl.integer('operator_id').notNullable();
-    //   tbl.string('url');
-    //   tbl.string('cuisineType').notNullable();
-    //   // tbl.string('customerRatings')
-    //   tbl.float('customerRatingAvg').notNullable();
-    // })
+    .createTable('trucks', tbl => {
+      tbl.increments();
+      tbl.string('name').notNullable();
+      tbl.integer('operator_id')
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('operator')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+      tbl.string('imgUrl');
+      tbl.string('cuisineType').notNullable();
+      // tbl.string('customerRatings')
+      tbl.float('customerRatingAvg');
+    })
   )
 };
 

@@ -1,14 +1,38 @@
 const db = require('../database/dbConfig.js');
 const atob = require('atob');
 module.exports = {
-    getTrucksOwned
+    getTrucks,
+    trucksOwned,
+    findTruckById,
+    insertTruck
 };
 
-function getTrucksOwned(operator_id) {
-    const [,payload] = operator_id.split('.')
-    const [id] =atob(payload)
+function getTrucks(){
+     return db('trucks');
+}
+
+function trucksOwned(token){
+    const [,payload] = token.split('.')
+    const [,,,id] =atob(payload).split(':')
+    const [realId] =id.split(',')
     
-    const realId = id
-    console.log(realId)
-    db('trucks as t').where('t.operator_id', '=', operator_id);
+   return db('trucks as t')
+   .where('t.operator_id', '=', realId);
+}
+
+function findTruckById(id){
+    return db('trucks')
+        .select(
+            'id',
+            'name',
+            'operator_id',
+            'imgUrl',
+            'cuisineType'
+        ).where({ id }).first();
+}
+
+async function insertTruck(truck){
+    const [id] = await db('trucks').insert(truck);
+
+    return findTruckById(id);
 }

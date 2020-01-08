@@ -1,5 +1,11 @@
 const db = require('../database/dbConfig.js');
 
+function findUsers() {
+    return db('operator as o')
+        .join('diner as d')
+        .select('d.*', 'o.*')
+}
+
 function findUser(filter) {
     const { username, type } = filter
     
@@ -11,7 +17,6 @@ function findUser(filter) {
 }
 
 function findUserById(type, id) {
-    console.log(type)
     if(type === 'diner'){
         return db('diner')
             .select(
@@ -36,16 +41,13 @@ function findUserById(type, id) {
 }
 
 async function insert(user) {
-
     const [id] = await db(`${user.type}`).insert(user);
 
-    console.log(user)
-
-
-    return findUserById(user.type, id)
+    return findUserById(user.type, id);
 }
 
 module.exports = {
+    findUsers,
     findUser,
     findUserById,
     insert

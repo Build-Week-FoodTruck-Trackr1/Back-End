@@ -13,7 +13,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use('/api', authRouter)
-// server.use('/api/trucks-owned', trucksRouter);
+server.use('/api/trucks', trucksRouter);
 
 server.get('/', (req, res) => {
     res.send('Congratulations Lambda Student! You made it! To register be sure to include "/api/register" to the link above')
