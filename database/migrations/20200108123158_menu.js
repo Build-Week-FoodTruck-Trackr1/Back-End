@@ -7,7 +7,7 @@ exports.up = function(knex) {
             .unsigned()
             .references('id')
             .inTable('trucks');
-        tbl.string('itemName');
+        tbl.string('itemName').unique();
         tbl.string('itemDescription');
         tbl.float('customerRatingAvg');
     })

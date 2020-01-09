@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 
 const Users = require('../models/userModels.js');
-const getToken = require('./getToken.js');
+const getToken = require('../authenticate/getToken.js');
 
 router.get('/diners', (req, res) => {
   Users.findDiners()

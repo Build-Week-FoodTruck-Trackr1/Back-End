@@ -20,16 +20,6 @@ router.get('/owned', authenticate, (req, res) => {
         .catch(error => res.status(500).json(error.message));
 })
 
-router.post('/menu', (req, res) => {
-
-  const name = req.body
-
-  Trucks.truckMenu(name)
-    .then(menu => {
-      res.json(menu)
-    })
-    .catch(error => res.status(500).json(error.message));
-})
 
 router.post('/ratings', (req, res) => {
 
@@ -50,8 +40,7 @@ router.post('/', authenticate, (req, res) => {
         .then(truck => {
             res.status(201).json(truck)
         })
-        .catch(err =>{
-            res.status(500).json({error_message:'Server Error', ErrNo:err})})
+        .catch(err =>{res.status(500).json({error_message:'Server Error', ErrNo:err})})
 })
 
 router.delete('/', authenticate, (req, res) => {
