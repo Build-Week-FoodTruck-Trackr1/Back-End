@@ -31,6 +31,17 @@ router.post('/menu', (req, res) => {
     .catch(error => res.status(500).json(error.message));
 })
 
+router.post('/ratings', (req, res) => {
+
+  const name = req.body
+
+  Trucks.truckRating(name)
+    .then(rating => {
+      res.json(rating)
+    })
+    .catch(error => res.status(500).json(error.message));
+})
+
 
 router.post('/', authenticate, (req, res) => {
     const truck = req.body;

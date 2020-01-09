@@ -7,7 +7,8 @@ module.exports = {
     findTruckById,
     insertTruck,
     remove,
-    update
+    update,
+    truckRating
 };
 
 function findOperatorId(token){
@@ -33,6 +34,14 @@ function truckMenu(name){
         .join('trucks as t', 'm.truck_id', 't.id')
         .select('m.*')
         .where(name, '=', 't.name')
+}
+
+function truckRating(name){
+    return db('customerTruckRatings as c')
+    .join('trucks as t', 'c.truck_id', 't.id')
+    .join('diner as d', 'c.diner_id', 'd.id')
+    .select( 'd.username', 'c.rate' )
+    .where(name, '=', 't.name' )
 }
 
 function findTruckById(id){

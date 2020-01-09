@@ -47,7 +47,11 @@ exports.up = function(knex) {
         .unsigned()
         .references('id')
         .inTable('trucks')
-      tbl.integer('rating')
+      tbl.integer('rate')
+      tbl.integer('diner_id')
+        .unsigned()
+        .references('id')
+        .inTable('diner')
     })
   )
 };
