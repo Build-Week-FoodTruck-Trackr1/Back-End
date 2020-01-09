@@ -1,6 +1,14 @@
 
 exports.up = function(knex) {
   return(knex.schema
+    .createTable('operator', tbl => {
+      tbl.increments();
+      tbl.string('type')
+      tbl.string('username', 128).unique().notNullable();
+      tbl.string('email', 128).notNullable();
+      tbl.string('password', 128).notNullable();
+      tbl.integer('currentLocation');
+    })
     .createTable('diner', tbl => {
       tbl.increments();
       tbl.string('type');
@@ -8,7 +16,6 @@ exports.up = function(knex) {
       tbl.string('email', 128).notNullable();
       tbl.string('password', 128).notNullable();
       tbl.string('currentLocation').notNullable();
-      tbl.integer('favoriteTrucks');
     })
     .createTable('favoriteTrucks', tbl => {
       tbl.integer('diner_id')
@@ -17,22 +24,12 @@ exports.up = function(knex) {
         .inTable('diner');
       tbl.string('favoriteTruck')
     })
-    .createTable('operator', tbl => {
-      tbl.increments();
-      tbl.string('type')
-      tbl.string('username', 128).unique().notNullable();
-      tbl.string('email', 128).notNullable();
-      tbl.string('password', 128).notNullable();
-      tbl.string('currentLocation').notNullable();
-      tbl.integer('trucksOwned');
-    })
     .createTable('trucks', tbl => {
       tbl.increments();
       tbl.string('name').notNullable();
       tbl.integer('operator_id').notNullable();
       tbl.string('imgUrl');
       tbl.string('cuisineType').notNullable();
-      tbl.integer('customerRatings')
       tbl.float('customerRatingAvg');
     })
     .createTable('trucksOwned', tbl => {
@@ -40,27 +37,28 @@ exports.up = function(knex) {
         .unsigned()
         .references('id')
         .inTable('operator')
-      tbl.integer('trucks')
+      tbl.integer('truck_id')
         .unsigned()
         .references('id')
         .inTable('trucks')
     })
-    .createTable('customerRatings', tbl => {
-      tbl.integer('trucks_id')
+    .createTable('customerTruckRatings', tbl => {
+      tbl.integer('truck_id')
         .unsigned()
         .references('id')
         .inTable('trucks')
+      tbl.integer('rating')
     })
   )
 };
 
 exports.down = function(knex) {
   return(knex.schema
+    .dropTableIfExists('favoriteTrucks')
+    .dropTableIfExists('customerTruckRatings')
+    .dropTableIfExists('trucksOwned')
+    .dropTableIfExists('trucks')
     .dropTableIfExists('diner')
     .dropTableIfExists('operator')
-    .dropTableIfExists('trucks')
-    .dropTableIfExists('favoriteTrucks')
-    .dropTableIfExists('customerRatings')
-    .dropTableIfExists('trucksOwned')
   )
 };

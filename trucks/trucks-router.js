@@ -20,6 +20,18 @@ router.get('/owned', authenticate, (req, res) => {
         .catch(error => res.status(500).json(error.message));
 })
 
+router.post('/menu', (req, res) => {
+
+  const name = req.body
+
+  Trucks.truckMenu(name)
+    .then(menu => {
+      res.json(menu)
+    })
+    .catch(error => res.status(500).json(error.message));
+})
+
+
 router.post('/', authenticate, (req, res) => {
     const truck = req.body;
 

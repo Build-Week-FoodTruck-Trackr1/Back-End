@@ -5,18 +5,20 @@ exports.up = function(knex) {
         tbl.increments();
         tbl.integer('truck_id')
             .unsigned()
-            .notNullable()
             .references('id')
             .inTable('trucks');
-        tbl.string('itemName').notNullable();
-        tbl.string('itemDescription').notNullable();
-        tbl.integer('itemPhotos');
-        tbl.integer('customerRatings');
-        tbl.integer('customerRatingAvg');
-        tbl.integer('currentLocation');
-        tbl.integer('nextLocation')
+        tbl.string('itemName');
+        tbl.string('itemDescription');
+        tbl.float('customerRatingAvg');
     })
-    .createTable('customerRatings', tbl => {
+    .createTable('itemPhoto', tbl => {
+        tbl.integer('menu_id')
+            .unsigned()
+            .references('id')
+            .inTable('menuItems')
+        tbl.string('imgUrl')
+    })
+    .createTable('customerItemRatings', tbl => {
         tbl.integer('menu_id')
             .unsigned()
             .notNullable()
@@ -48,9 +50,10 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return(knex.schema
-    .dropTableIfExists('menuItems')
-    .dropTableIfExists('customerRatings')
+    .dropTableIfExists('customerItemRatings')
     .dropTableIfExists('currentLocation')
-    .dropTableIfExists('nextLocation') 
+    .dropTableIfExists('nextLocation')
+    .dropTableIfExists('itemPhoto') 
+    .dropTableIfExists('menuItems')
     )
 };

@@ -3,6 +3,7 @@ const atob = require('atob');
 module.exports = {
     getTrucks,
     trucksOwned,
+    truckMenu,
     findTruckById,
     insertTruck,
     remove,
@@ -27,6 +28,15 @@ function trucksOwned(token){
     
    return db('trucks as t')
    .where('t.operator_id', '=', id);
+}
+
+function truckMenu(name){
+
+
+    return db('menuItems as m')
+        .join('trucks as t', 'm.truck_id', 't.id')
+        .select('m.*', 't.name')
+        .where(name, '=', 't.name')
 }
 
 function findTruckById(id){
