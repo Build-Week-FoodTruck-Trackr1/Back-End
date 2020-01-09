@@ -29,7 +29,6 @@ exports.up = function(knex) {
     .createTable('currentLocation', tbl => {
         tbl.integer('truck_id')
             .unsigned()
-            .notNullable()
             .references('id')
             .inTable('trucks');
         tbl.string('location');

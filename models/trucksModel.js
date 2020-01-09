@@ -20,7 +20,10 @@ function findOperatorId(token){
 }
 
 function getTrucks(){
-     return db('trucks').limit(10);
+     return db('trucks as t')
+        .join('currentLocation as c', 't.id', 'c.truck_id')
+        .join('nextLocation as n', 't.id', 'n.truck_id')
+        .select('t.*', 'c.location', 'c.departureTime', 'n.arrivalTime', 'n.location', 'n.departureTime' )
 }
 
 function trucksOwned(token){
