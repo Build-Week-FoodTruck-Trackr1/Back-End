@@ -48,7 +48,7 @@ Trucks Endpoints
 | Table    |  Method   |  Endpoint | required fields       | Description  |
 |----------|:---------|:----------|:----------------------|:-------------|
 | trucks | get | /trucks/ | none | Lists first 100 trucks in the database |
-| trucks | get | /trucks/owned | token with operator_id| Lists the trucks owned by the operator that is logged in|
+| trucks | get | /trucks/owned/ | token with operator_id| Lists the trucks owned by the operator that is logged in|
 | trucks | post | /trucks/ | name, operator_id, cuisineType | Adds truck to the database |
 | trucks | delete | /trucks/ | none | deletes a truck if and only if the operator_id and name of the truck matches with one in the database |
 | truck | put | /trucks/ | name, operator_id, cuisineType | Modifies a truck if and only if a user has a matching operator_id and truck name |
@@ -56,6 +56,21 @@ Trucks Endpoints
 Status Codes
 - 200 - If the get request successfully goes through the endpoint will return a response with a status code 200
 - 404 - If the truck with the specified id or name does not exist, the endpoint will return a response with a status code 404
+- 401 - If there is no token on the headers of the request, the endpoint will return a response with a status code 401
+- 403 - If the user account doesn't have the correct type, the endpoint will return a response with a status code 403
+- 500 - If there is a server error, the endpoint will return a response with a status code 500.
+
+Menu Endpoints
+----------------------------------------------
+
+| Table    |  Method   |  Endpoint | required fields       | Description  |
+|----------|:---------|:----------|:----------------------|:-------------|
+| menuItems | post | /trucks/menu/ | name(name of the truck) | list the items in the menu for the given truck |
+| menuItems | post | /trucks/menu/additem/ | truck_id, itemName(must be unique), itemDescription, customerRatingAvg | Adds an item in the truck's menu array |
+
+Status Codes
+- 200 - If the get request successfully goes through the endpoint will return a response with a status code 200
+- 404 - If the menu with the specified name does not exist, the endpoint will return a response with a status code 404
 - 401 - If there is no token on the headers of the request, the endpoint will return a response with a status code 401
 - 403 - If the user account doesn't have the correct type, the endpoint will return a response with a status code 403
 - 500 - If there is a server error, the endpoint will return a response with a status code 500.
