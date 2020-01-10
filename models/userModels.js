@@ -26,23 +26,11 @@ function findUser(filter) {
 function findUserById(type, id) {
     if(type === 'diner'){
         return db('diner')
-            .select(
-                'type',
-                'id',
-                'username',
-                'email',
-                'currentLocation'
-            ).where({ id })
+        .where({ id })
             .first();
     } else if(type === 'operator') {
         return db('operator')
-        .select(
-            'type',
-            'id',
-            'username',
-            'email',
-            'currentLocation'
-        ).where({ id })
+        .where({ id })
             .first();
     } else {
         return 'not a valid Database'

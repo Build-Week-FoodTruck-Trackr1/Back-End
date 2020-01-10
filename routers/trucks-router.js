@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
 const Trucks = require('../models/trucksModel.js');
-const authenticate = require('../authenticate/authenticate-middleware.js')
+const authenticate = require('../authenticate/authenticate-middleware.js');
+const check = require('../authenticate/check-userType-Middleware.js');
 
 router.get('/', (req, res) => {
     Trucks.getTrucks()
@@ -11,7 +12,7 @@ router.get('/', (req, res) => {
         .catch(error => res.status(500).json(error.message));
 })
 
-router.get('/owned', authenticate, (req, res) => {
+router.get('/owned', authenticate, check('diner'), (req, res) => {
     const token = req.headers.authorization;
     Trucks.trucksOwned(token)
         .then(trucks => {
