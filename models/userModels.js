@@ -27,6 +27,7 @@ function findUserById(type, id) {
     if(type === 'diner'){
         return db('diner')
             .select(
+                'type',
                 'id',
                 'username',
                 'email',
@@ -36,6 +37,7 @@ function findUserById(type, id) {
     } else if(type === 'operator') {
         return db('operator')
         .select(
+            'type',
             'id',
             'username',
             'email',

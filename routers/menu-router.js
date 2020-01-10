@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const Menu = require('../models/menuModel.js');
 const authenticate = require('../authenticate/authenticate-middleware.js');
+const checkType = require('../authenticate/check-userType-Middleware.js')
 
 
 router.post('/', (req, res) => {
@@ -24,6 +25,10 @@ router.post('/additem', authenticate, (req, res) => {
         })
         .catch(err =>{res.status(500).json({error_message:'Server Error', ErrNo:err})})
 })
+
+// router.get('/', authenticate, checkType('diner'), (req, res) => {
+
+// })
 
 
 module.exports = router

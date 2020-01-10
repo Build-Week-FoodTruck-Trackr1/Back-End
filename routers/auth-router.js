@@ -27,7 +27,13 @@ router.post('/register', (req, res) => {
     Users.insert(user)
         .then(newUser => {
             console.log(newUser)
-            res.status(201).json({message: 'Success! you have completed registration', newUser, token})
+            res.status(201).json({
+              message: 'Success! you have completed registration',
+              type: `${newUser.type}`,
+              id: `${newUser.id}`,
+              location:`${newUser.currentLocation}`,
+              token
+            } )
         })
         .catch(err =>{
             res.status(500).json({error_message:'Server Error', ErrNo:err})})
