@@ -47,6 +47,7 @@ router.post('/login', (req, res) => {
             message: `Hi ${user.username}`,
             type: `${user.type}`,
             id: `${user.id}`,
+            location:`${user.currentLocation}`,
             token
           });
         } else {
