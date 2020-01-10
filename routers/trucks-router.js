@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         .catch(error => res.status(500).json(error.message));
 })
 
-router.get('/owned', authenticate, check('diner'), (req, res) => {
+router.get('/owned', authenticate, (req, res) => {
     const token = req.headers.authorization;
     Trucks.trucksOwned(token)
         .then(trucks => {
