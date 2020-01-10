@@ -22,11 +22,10 @@ router.post('/register', (req, res) => {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 6);
     user.password = hash;
-    const token = getToken(user);
 
     Users.insert(user)
         .then(newUser => {
-            console.log(newUser)
+          const token = getToken(newUser);
             res.status(201).json({
               message: 'Success! you have completed registration',
               type: `${newUser.type}`,
