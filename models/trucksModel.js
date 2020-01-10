@@ -7,7 +7,9 @@ module.exports = {
     insertTruck,
     remove,
     update,
-    truckRating
+    truckRating,
+    truckRate,
+    findTruck
 };
 
 function findOperatorId(token){
@@ -67,4 +69,18 @@ function update(changes, token){
     const name = changes.name 
 
     return db('trucks').where(('operator_id', '=', id) && {name}).update(changes)
+}
+
+function findRatingById(id){
+    return db('trucks').where({ id }).first();
+}
+
+async function truckRate(rating){
+    const [id] = await db('customerTruckRatings').insert(rating)
+
+    return findRatingById(id)
+}
+
+function findTruck(search){
+    return db('trucks').where(search)
 }

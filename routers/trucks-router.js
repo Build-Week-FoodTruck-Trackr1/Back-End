@@ -12,13 +12,13 @@ router.get('/', (req, res) => {
         .catch(error => res.status(500).json(error.message));
 })
 
-router.get('/owned', authenticate, (req, res) => {
+router.get('/owned', authenticate, check('operator'), (req, res) => {
     const token = req.headers.authorization;
     Trucks.trucksOwned(token)
         .then(trucks => {
             res.json(trucks);
         })
-        .catch(error => res.status(500).json(error.message));
+        .catch(error => res.status(500).json({error:error.message}));
 })
 
 
@@ -31,6 +31,26 @@ router.post('/ratings', (req, res) => {
       res.json(rating)
     })
     .catch(error => res.status(500).json(error.message));
+})
+
+router.post('/search', (req, res) => {
+  const search = req.body;
+
+  Trucks.findTruck(search)
+    .then(truckInfo => {
+      res.json(truckInfo)
+    })
+    .catch(err => res.status(500).json({message: 'Server Error'}))
+})
+
+router.post('/rate', authenticate, check('diner'), (req, res) => {
+  const rate = {...req.body, diner_id:`${req.decodedToken.id}`};
+
+  Trucks.truckRate(rate)
+    .then(newRate => {
+      res.status(201).json(newRate)
+    })
+    .catch(err =>{res.status(500).json({error_message:'Server Error', ErrNo:err})})
 })
 
 
