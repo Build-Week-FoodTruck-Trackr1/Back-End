@@ -46,6 +46,7 @@ router.post('/login', (req, res) => {
           res.status(200).json({
             message: `Hi ${user.username}`,
             type: `${user.type}`,
+            id: `${user.id}`,
             token
           });
         } else {

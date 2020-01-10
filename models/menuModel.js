@@ -1,9 +1,17 @@
 const db = require('../database/dbConfig.js');
+const atob = require('atob')
 
 module.exports = {
     findMenuItemById,
     insertMenuItem,
     menuItems,
+}
+
+function findOperatorId(token){
+    const [,payload] = token.split('.')
+    const [,,,id] =atob(payload).split(':')
+    const [realId] =id.split(',')
+    return realId
 }
 
 
@@ -18,7 +26,10 @@ function findMenuItemById(id){
     return db('menuItems').where({ id }).first();
 }
 
-async function insertMenuItem(item){
-    const [id] = await db('menuItems').insert(item)
+async function insertMenuItem(item, token){
+    const operatorId = findOperatorId(token);
+
+    const [id] = await db('menuItems as m').insert(item)
+
     return findMenuItemById(id)
 }

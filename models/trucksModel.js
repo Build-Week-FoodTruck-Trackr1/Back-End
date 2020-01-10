@@ -22,7 +22,7 @@ function getTrucks(){
      return db('trucks as t')
         .join('currentLocation as c', 't.id', 'c.truck_id')
         .join('nextLocation as n', 't.id', 'n.truck_id')
-        .select('t.*', 'c.location', 'c.departureTime', 'n.arrivalTime', 'n.location', 'n.departureTime' )
+        .select('t.*', 'c.currentLocation', 'c.currentDepartureTime', 'n.arrivalTime', 'n.location', 'n.departureTime' )
 }
 
 function trucksOwned(token){

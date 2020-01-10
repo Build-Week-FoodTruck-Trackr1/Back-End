@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Menu = require('../models/menuModel.js');
 const authenticate = require('../authenticate/authenticate-middleware.js');
 
+
 router.post('/', (req, res) => {
     const name = req.body
   
@@ -14,9 +15,10 @@ router.post('/', (req, res) => {
 })
 
 router.post('/additem', authenticate, (req, res) => {
+    const token = req.headers.authorization
     const item = req.body;
 
-    Menu.insertMenuItem(item)
+    Menu.insertMenuItem(item, token)
         .then(item => {
             res.status(201).json(item)
         })

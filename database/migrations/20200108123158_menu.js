@@ -8,6 +8,7 @@ exports.up = function(knex) {
             .references('id')
             .inTable('trucks');
         tbl.string('itemName').unique();
+        tbl.float('itemPrice')
         tbl.string('itemDescription');
         tbl.float('customerRatingAvg');
     })
@@ -31,8 +32,8 @@ exports.up = function(knex) {
             .unsigned()
             .references('id')
             .inTable('trucks');
-        tbl.string('location');
-        tbl.string('departureTime');
+        tbl.string('currentLocation');
+        tbl.string('currentDepartureTime');
     })
     .createTable('nextLocation', tbl => {
         tbl.integer('truck_id')
