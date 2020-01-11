@@ -60,7 +60,7 @@ async function insertTruck(truck){
 
 function remove(name, operator_id) {
 //    const id = findOperatorId(token);
-
+ 
     return db('trucks').where(({operator_id}, '=', 'operator_id') && name).first().del();
 
 }

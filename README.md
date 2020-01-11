@@ -51,7 +51,8 @@ Trucks Endpoints
 | trucks | get | /trucks/owned/ | token with operator_id| Lists the trucks owned by the operator that is logged in|
 | trucks | post | /trucks/ | name, operator_id, cuisineType | Adds truck to the database |
 | trucks | delete | /trucks/ | none | deletes a truck if and only if the operator_id and name of the truck matches with one in the database |
-| truck | put | /trucks/ | name, operator_id, cuisineType | Modifies a truck if and only if a user has a matching operator_id and truck name |
+| trucks | put | /trucks/ | name, operator_id, cuisineType | Modifies a truck if and only if a user has a matching operator_id and truck name |
+| trucks | post | /trucks/search/ | name or cuisineType or customerRatingAvg | searches the truck data base depending on which key a user has searched for |
 
 Status Codes
 - 200 - If the get request successfully goes through the endpoint will return a response with a status code 200
