@@ -4,9 +4,9 @@ exports.up = function(knex) {
     .createTable('menuItems', tbl => {
         tbl.increments();
         tbl.integer('truck_id')
-            .unsigned()
-            .references('id')
-            .inTable('trucks');
+            // .unsigned()
+            // .references('id')
+            // .inTable('trucks');
         tbl.string('itemName').unique();
         tbl.float('itemPrice')
         tbl.string('itemDescription');
@@ -29,18 +29,18 @@ exports.up = function(knex) {
     })
     .createTable('currentLocation', tbl => {
         tbl.integer('truck_id')
-            .unsigned()
-            .references('id')
-            .inTable('trucks');
+            // .unsigned()
+            // .references('id')
+            // .inTable('trucks');
         tbl.string('currentLocation');
         tbl.string('currentDepartureTime');
     })
     .createTable('nextLocation', tbl => {
         tbl.integer('truck_id')
-            .unsigned()
-            .notNullable()
-            .references('id')
-            .inTable('trucks');
+            // .unsigned()
+            // .notNullable()
+            // .references('id')
+            // .inTable('trucks');
         tbl.string('location');
         tbl.string('arrivalTime')
         tbl.string('departureTime')

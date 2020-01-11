@@ -64,22 +64,21 @@ router.post('/', authenticate, (req, res) => {
         .catch(err =>{res.status(500).json({error_message:'Server Error', ErrNo:err})})
 })
 
-router.delete('/', authenticate, (req, res) => {
+router.delete('/',authenticate, (req, res) => {
     const token = req.headers.authorization;
 
-    const truckName = req.body   
+    const truckName = req.body;   
 
     Trucks.remove(truckName, token)
         .then(count => {
-            console.log(count)
             if (count) {
               res.json({ removed: count });
             } else {
-              res.status(404).json({ message: 'Could not find truck with that name' });
+              res.status(404).json({ message: 'Could not find truck with that name', count });
             }
           })
           .catch(err => {
-            res.status(500).json({ message: 'Failed to delete truck' });
+            res.status(500).json({ message: 'Failed to delete truck', err });
           });
 })  
 
